@@ -1,3 +1,3 @@
 # w.c
 
-Galen's work.cards project
+Galen's wild.chicken project
