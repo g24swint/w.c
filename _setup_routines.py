@@ -42,10 +42,10 @@ def _init_logs(reset_handlers=True):
         log_stream.setFormatter(log_formatter)
         log.addHandler(log_stream)
         log.setLevel(logging.DEBUG)
-    log.debug("Starting in %s" % STARTUP_PATH)
+    log.debug("Starting in %s", (STARTUP_PATH))
     log.debug("Versions:")
-    log.debug("  slqalchemy: %s" % sa.__version__)
-    log.debug("     sqlite3: %s" % db.version)
+    log.debug("  slqalchemy: %s", (sa.__version__))
+    log.debug("     sqlite3: %s", (db.version))
     return log
 
 def _setup_engine(db_dir=None):

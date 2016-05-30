@@ -19,7 +19,7 @@ import sqlalchemy as sa
 
 # In[5]:
 
-from _datamodel import *
+import * from _datamodel
 
 
 # In[15]:

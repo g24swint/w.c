@@ -3,7 +3,8 @@
 
 # In[ ]:
 
-'''_data_model.py contains the data models for the essential parts of the todo lists in several major classes.
+'''_data_model.py contains the data models for the essential parts of the 
+todo lists in several major classes.
 '''
 import sqlalchemy as sa
 
@@ -17,7 +18,7 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-# In[ ]:
+# In[1]:
 
 
 class Tasks(Base):
@@ -34,6 +35,11 @@ class Tasks(Base):
     status = sa.Column(sa.String(140))
     
     def __repr__(self):
-        return "Task {.tid}: ({.desc}, {.orig_comp}, {.cur_comp}, {.for_whom}, {.status})".                format(self)
+        return "Task {.tid}: ({.desc}, {.orig_comp}, {.cur_comp}, "                ""{.for_whom}, {.status})".format(self)
     
+
+
+# In[ ]:
+
+
 
