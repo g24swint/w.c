@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 '''_data_model.py contains the data models for the essential parts of the 
 todo lists in several major classes.
@@ -9,16 +9,16 @@ todo lists in several major classes.
 import sqlalchemy as sa
 
 
-# In[ ]:
+# In[2]:
 
 # disable pylint squawks when using Declarative
-# pylint: disable=too-few-public-methods,invalid-constant-name
+# pylint: disable=too-few-public-methods,invalid-name
 
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-# In[1]:
+# In[3]:
 
 
 class Tasks(Base):
@@ -35,8 +35,8 @@ class Tasks(Base):
     status = sa.Column(sa.String(140))
     
     def __repr__(self):
-        return "Task {.tid}: ({.desc}, {.orig_comp}, {.cur_comp}, "                ""{.for_whom}, {.status})".format(self)
-    
+        #pylint: disable: line-too-long
+        return "Task {.tid}: ({.desc}, {.orig_comp}, {.cur_comp}, " +                 "{.for_whom}, {.status})".format(self)
 
 
 # In[ ]:

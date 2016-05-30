@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 """_setup_routines submodule initializes logger and data base locations.
 
@@ -15,12 +15,12 @@ import sqlite3 as db
 import sqlalchemy as sa
 
 
-# In[ ]:
+# In[2]:
 
 STARTUP_PATH = os.getcwd()
 
 
-# In[ ]:
+# In[3]:
 
 def _init_logs(reset_handlers=True):
     """Create a sys.stdout logger for w_c and print startup information 
@@ -62,8 +62,8 @@ def _setup_engine(db_dir=None):
     if not os.path.exists(db_dir):
         os.mkdir(db_dir)
     db_name = os.path.join(db_dir, "work_cards.db")
-    log.debug(" db_dir:: %s" % db_dir)
-    log.debug("db_name:: %s" % db_name)
+    log.debug(" db_dir:: %s", (db_dir))
+    log.debug("db_name:: %s", (db_name))
     db_engine = sa.create_engine("sqlite:///" + db_name)
     return db_engine
 

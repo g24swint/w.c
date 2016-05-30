@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 '''w.c task management API including
 
@@ -11,20 +11,18 @@ update_task
 '''
 import logging as logging
 import datetime as dt
-import time
 
-import sqlite3 as db
 import sqlalchemy as sa
 
 
-# In[5]:
+# In[3]:
 
-import * from _datamodel
+from _data_model import *
 
 
-# In[15]:
+# In[4]:
 
-def add_task(desc, orig_comp, for_whom):
+def add_task(session, desc, orig_comp, for_whom):
     '''Adds a task to the tasks list.
     
     Params:
@@ -41,19 +39,20 @@ def add_task(desc, orig_comp, for_whom):
                         status="Todo", for_whom=for_whom)
     session.add(task_to_add)
     session.commit()
-    log.debug("added task: %s" % str(task_to_add))
+    log.debug("added task: %s", (str(task_to_add)))
     return task_to_add.id
 
-add_task(desc="Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29), for_whom=1)
+add_task(session, desc="Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29), for_whom=1)
 
 
 # In[7]:
 
+#pylint: disable-no-member
 Tasks.__table__
 
 Base.metadata.create_all(db_engine)
 
-first_task = Tasks(desc = "Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
+first_task = Tasks(desc="Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
                   cur_comp=dt.datetime(2016, 6, 4), for_whom=1, status="Todo")
 
 from sqlalchemy.orm import sessionmaker
@@ -71,6 +70,6 @@ for task in session.query(Tasks).filter_by():
 
 # In[ ]:
 
-def update_task(id, desc):
+def update_task():
     pass
 

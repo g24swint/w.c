@@ -18,6 +18,7 @@ from _setup_routines import _init_logs, _setup_engine
 # In[2]:
 
 print(__name__)
+
 if __name__ == '__main__':
     print('Running main')
     wc_log = _init_logs()
