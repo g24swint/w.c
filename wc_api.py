@@ -48,12 +48,14 @@ def _init_logs(reset_handlers=True):
 _init_logs()
 
 
-# In[4]:
+# In[9]:
 
 def _setup_engine():
-    '''Set the '''
+    '''Set the database executioin file and create a db directory if none exists'''
     global db_dir, db_engine 
     db_dir = os.path.join(os.path.dirname(startup_path),'db')
+    if not os.path.exists(db_dir):
+        os.mkdir(db_dir)
     db_name = os.path.join(db_dir, "work_cards.db")
     wc_log.debug(" db_dir:: %s" % db_dir)
     wc_log.debug("db_name:: %s" % db_name)
@@ -99,39 +101,39 @@ Tasks.__table__
 Base.metadata.create_all(db_engine)
 
 
-# In[9]:
+# In[ ]:
 
 first_task = Tasks(desc = "Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
                   cur_comp=dt.datetime(2016, 6, 4), for_whom=1)
 
 
-# In[10]:
+# In[ ]:
 
 from sqlalchemy.orm import sessionmaker
 Session = sessionmaker(bind=db_engine)
 
 
-# In[11]:
+# In[ ]:
 
 session = Session()
 
 
-# In[12]:
+# In[ ]:
 
 session.add(first_task)
 
 
-# In[13]:
+# In[ ]:
 
 session.flush()
 
 
-# In[14]:
+# In[ ]:
 
 session.commit()
 
 
-# In[15]:
+# In[ ]:
 
 for task in session.query(Tasks).filter_by():
     print(task)
