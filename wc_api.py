@@ -48,7 +48,7 @@ def _init_logs(reset_handlers=True):
 _init_logs()
 
 
-# In[9]:
+# In[4]:
 
 def _setup_engine():
     '''Set the database executioin file and create a db directory if none exists'''
@@ -84,10 +84,12 @@ class Tasks(Base):
     orig_comp = sa.Column(sa.DateTime)
     cur_comp = sa.Column(sa.DateTime)
     for_whom = sa.Column(sa.Integer)
+    status = sa.Column(sa.String(140))
     
     def __repr__(self):
-        return "Task {}: ({}, {}, {}, {})".format(
-        self.id, self.desc, self.orig_comp, self.cur_comp, self.for_whom )
+        return "Task {}: ({}, {}, {}, {}, {})".format(
+        self.id, self.desc, self.orig_comp, self.cur_comp, self.for_whom,
+        self.status)
     
 
 
@@ -101,45 +103,57 @@ Tasks.__table__
 Base.metadata.create_all(db_engine)
 
 
-# In[ ]:
+# In[9]:
 
 first_task = Tasks(desc = "Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
-                  cur_comp=dt.datetime(2016, 6, 4), for_whom=1)
+                  cur_comp=dt.datetime(2016, 6, 4), for_whom=1, status="Todo")
 
 
-# In[ ]:
+# In[10]:
 
 from sqlalchemy.orm import sessionmaker
 Session = sessionmaker(bind=db_engine)
 
 
-# In[ ]:
+# In[11]:
 
 session = Session()
 
 
-# In[ ]:
+# In[12]:
 
 session.add(first_task)
 
 
-# In[ ]:
-
-session.flush()
-
-
-# In[ ]:
+# In[13]:
 
 session.commit()
 
 
-# In[ ]:
+# In[15]:
+
+def add_task(desc, orig_comp, for_whom):
+    '''Adds a task to the tasks list.
+    
+    Params:
+        desc: description of the task
+        orig_comp: the original completion date set for the task
+        cur_comp: the current completion date on the task
+        for_whom: task for whom its being completed
+        
+    Returns:
+        nada
+    '''
+    task_to_add = Tasks(desc=desc, orig_comp=orig_comp, cur_comp=orig_comp, 
+                        status="Todo", for_whom=for_whom)
+    session.add(task_to_add)
+    session.commit()
+
+add_task(desc="Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29), for_whom=1)
+
+
+# In[16]:
 
 for task in session.query(Tasks).filter_by():
     print(task)
-
-
-# In[ ]:
-
-
 
