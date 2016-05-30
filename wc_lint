@@ -1,1 +1,1 @@
-pylint --rcfile wc.lint.rc *.py
+pylint --rcfile wc.pylintrc *.py
