@@ -1,0 +1,40 @@
+name: C:\Users\Galen\Anaconda2\envs\py3k
+dependencies:
+- backports=1.0=py35_0
+- decorator=4.0.9=py35_0
+- entrypoints=0.2=py35_1
+- get_terminal_size=1.0.0=py35_0
+- ipykernel=4.3.1=py35_0
+- ipython=4.2.0=py35_0
+- ipython_genutils=0.1.0=py35_0
+- ipywidgets=4.1.1=py35_0
+- jinja2=2.8=py35_1
+- jsonschema=2.5.1=py35_0
+- jupyter_client=4.2.2=py35_0
+- jupyter_core=4.1.0=py35_0
+- markupsafe=0.23=py35_2
+- mistune=0.7.2=py35_0
+- nbconvert=4.2.0=py35_0
+- nbformat=4.0.1=py35_0
+- notebook=4.2.0=py35_0
+- path.py=8.2.1=py35_0
+- pickleshare=0.5=py35_0
+- pip=8.1.1=py35_1
+- pygments=2.1.3=py35_0
+- pyreadline=2.1=py35_0
+- python=3.5.1=4
+- pyzmq=15.2.0=py35_0
+- setuptools=21.2.1=py35_0
+- simplegeneric=0.8.1=py35_0
+- sqlalchemy=1.0.13=py35_0
+- sqlite=3.13.0=vc14_0
+- tornado=4.3=py35_1
+- traitlets=4.2.1=py35_0
+- vs2015_runtime=14.00.23026.0=0
+- wheel=0.29.0=py35_0
+- pip:
+  - backports.shutil-get-terminal-size==1.0.0
+  - ipython-genutils==0.1.0
+  - jupyter-client==4.2.2
+  - jupyter-core==4.1.0
+  - sphinx==1.3.1
