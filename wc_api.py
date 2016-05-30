@@ -99,7 +99,34 @@ Tasks.__table__
 Base.metadata.create_all(db_engine)
 
 
-# In[10]:
+# In[13]:
+
+first_task = Tasks(desc = "Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
+                  cur_comp=dt.datetime(2016, 6, 4), for_whom=1)
+
+
+# In[16]:
+
+from sqlalchemy.orm import sessionmaker
+Session = sessionmaker(bind=db_engine)
+
+
+# In[17]:
+
+session = Session()
+
+
+# In[18]:
+
+session.add(first_task)
+
+
+# In[19]:
+
+session.flush()
+
+
+# In[ ]:
 
 
 
