@@ -13,29 +13,12 @@ import time
 
 # In[5]:
 
-from sqlalchemy.ext.declarative import declarative_base
-Base = declarative_base()
+from _datamodel import *
 
 
 # In[6]:
 
-class Tasks(Base):
-    '''SQLAlchemy Tasks class that maps all tasks to the tasks table
-    
-    Task descriptions default to Twitter length strings :-)
-    '''
-    __tablename__ = "tasks"
-    id = sa.Column(sa.Integer, primary_key = True)
-    desc = sa.Column(sa.String(140))
-    orig_comp = sa.Column(sa.DateTime)
-    cur_comp = sa.Column(sa.DateTime)
-    for_whom = sa.Column(sa.Integer)
-    status = sa.Column(sa.String(140))
-    
-    def __repr__(self):
-        return "Task {.id}: ({.desc}, {.orig_comp}, {.cur_comp}, {.for_whom}, {.status})".format(
-        self)
-    
+
 
 
 # In[7]:

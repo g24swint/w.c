@@ -14,6 +14,7 @@ import datetime as dt
 import time
 
 from _setup_routines import _init_logs, _setup_engine
+from _data_model
 
 
 # In[2]:
