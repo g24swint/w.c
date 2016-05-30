@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[12]:
+# In[1]:
 
 import sys
 import os
@@ -14,7 +14,7 @@ import datetime as dt
 import time
 
 
-# In[3]:
+# In[2]:
 
 # "global" variables
 wc_log = None
@@ -23,7 +23,7 @@ db_dir = None
 db_engine = None
 
 
-# In[4]:
+# In[3]:
 
 def _init_logs(reset_handlers=True):
     """Create a sys.stdout logger for w_c and print startup information 
@@ -48,29 +48,27 @@ def _init_logs(reset_handlers=True):
 _init_logs()
 
 
-# In[8]:
+# In[5]:
 
 def _setup_engine():
     '''Set the '''
     global db_dir, db_engine 
     db_dir = os.path.join(os.path.dirname(startup_path),'db')
-    wc_log.debug("db_dir:: %s" % db_dir)
-    db_engine = sa.create_engine("sqlite:///" + db_dir)
+    db_name = os.path.join(db_dir, "work_cards.db")
+    wc_log.debug(" db_dir:: %s" % db_dir)
+    wc_log.debug("db_name:: %s" % db_name)
+    db_engine = sa.create_engine("sqlite:///" + db_name )
     
 _setup_engine()
 
 
-# In[10]:
+# In[6]:
 
 from sqlalchemy.ext.declarative import declarative_base
-
-
-# In[11]:
-
 Base = declarative_base()
 
 
-# In[26]:
+# In[7]:
 
 
 class Tasks(Base):
@@ -91,7 +89,17 @@ class Tasks(Base):
     
 
 
-# In[27]:
+# In[8]:
 
 Tasks.__table__
+
+
+# In[11]:
+
+Base.metadata.create_all(db_engine)
+
+
+# In[10]:
+
+
 
