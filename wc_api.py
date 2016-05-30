@@ -3,59 +3,23 @@
 
 # In[1]:
 
-import sqlite3 as db
-import sqlalchemy as sa
-import logging as logging
+'''w.c task management API including
 
+add_task
+update_task
+
+'''
+import logging as logging
 import datetime as dt
 import time
+
+import sqlite3 as db
+import sqlalchemy as sa
 
 
 # In[5]:
 
 from _datamodel import *
-
-
-# In[6]:
-
-
-
-
-# In[7]:
-
-Tasks.__table__
-
-
-# In[8]:
-
-Base.metadata.create_all(db_engine)
-
-
-# In[9]:
-
-first_task = Tasks(desc = "Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
-                  cur_comp=dt.datetime(2016, 6, 4), for_whom=1, status="Todo")
-
-
-# In[10]:
-
-from sqlalchemy.orm import sessionmaker
-Session = sessionmaker(bind=db_engine)
-
-
-# In[11]:
-
-session = Session()
-
-
-# In[12]:
-
-session.add(first_task)
-
-
-# In[13]:
-
-session.commit()
 
 
 # In[15]:
@@ -77,13 +41,29 @@ def add_task(desc, orig_comp, for_whom):
                         status="Todo", for_whom=for_whom)
     session.add(task_to_add)
     session.commit()
-    log.debug("added task: {}".format(str(task_to_add)))
+    log.debug("added task: %s" % str(task_to_add))
     return task_to_add.id
 
 add_task(desc="Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29), for_whom=1)
 
 
-# In[1]:
+# In[7]:
+
+Tasks.__table__
+
+Base.metadata.create_all(db_engine)
+
+first_task = Tasks(desc = "Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
+                  cur_comp=dt.datetime(2016, 6, 4), for_whom=1, status="Todo")
+
+from sqlalchemy.orm import sessionmaker
+Session = sessionmaker(bind=db_engine)
+
+session = Session()
+
+session.add(first_task)
+
+session.commit()
 
 for task in session.query(Tasks).filter_by():
     print(task)
@@ -91,5 +71,6 @@ for task in session.query(Tasks).filter_by():
 
 # In[ ]:
 
-def update_task(id, desc,)
+def update_task(id, desc):
+    pass
 

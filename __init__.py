@@ -5,31 +5,25 @@
 
 import sys
 import os
-
-import sqlite3 as db
-import sqlalchemy as sa
-import logging as logging
-
 import datetime as dt
 import time
+import logging
+
 
 from _setup_routines import _init_logs, _setup_engine
-from _data_model
+
+
+# In[ ]:
+
+
 
 
 # In[2]:
 
-# "global" variables
-wc_log = None
-db_engine = None
-
-
-# In[3]:
-
 wc_log = _init_logs()
 
 
-# In[4]:
+# In[3]:
 
 db_engine = _setup_engine()
 
