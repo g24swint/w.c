@@ -48,7 +48,7 @@ def _init_logs(reset_handlers=True):
 _init_logs()
 
 
-# In[5]:
+# In[4]:
 
 def _setup_engine():
     '''Set the '''
@@ -62,13 +62,13 @@ def _setup_engine():
 _setup_engine()
 
 
-# In[6]:
+# In[5]:
 
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-# In[7]:
+# In[6]:
 
 
 class Tasks(Base):
@@ -84,46 +84,57 @@ class Tasks(Base):
     for_whom = sa.Column(sa.Integer)
     
     def __repr__(self):
-        return "Task {id}: ({desc}, {orig_comp}, {cur_comp}, {for_whom})".format(
-        self )
+        return "Task {}: ({}, {}, {}, {})".format(
+        self.id, self.desc, self.orig_comp, self.cur_comp, self.for_whom )
     
 
 
-# In[8]:
+# In[7]:
 
 Tasks.__table__
 
 
-# In[11]:
+# In[8]:
 
 Base.metadata.create_all(db_engine)
 
 
-# In[13]:
+# In[9]:
 
 first_task = Tasks(desc = "Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
                   cur_comp=dt.datetime(2016, 6, 4), for_whom=1)
 
 
-# In[16]:
+# In[10]:
 
 from sqlalchemy.orm import sessionmaker
 Session = sessionmaker(bind=db_engine)
 
 
-# In[17]:
+# In[11]:
 
 session = Session()
 
 
-# In[18]:
+# In[12]:
 
 session.add(first_task)
 
 
-# In[19]:
+# In[13]:
 
 session.flush()
+
+
+# In[14]:
+
+session.commit()
+
+
+# In[15]:
+
+for task in session.query(Tasks).filter_by():
+    print(task)
 
 
 # In[ ]:
