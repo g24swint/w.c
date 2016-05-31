@@ -16,7 +16,7 @@ from _setup_routines import _init_logs, _setup_engine, _open_session
 import wc_api
 
 
-# In[2]:
+# In[5]:
 
 def standalone_exec():
     print('Running main')
@@ -24,11 +24,11 @@ def standalone_exec():
     db_engine = _setup_engine() 
     session = _open_session(db_engine)
     wc_api.add_task(session, desc="Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29), for_whom=1)
-    wc_api.list_tasks()
+    wc_api.list_tasks(session)
     return 0
 
 
-# In[3]:
+# In[6]:
 
 print(__name__)
 
