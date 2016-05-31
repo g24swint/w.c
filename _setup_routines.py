@@ -67,3 +67,22 @@ def _setup_engine(db_dir=None):
     db_engine = sa.create_engine("sqlite:///" + db_name)
     return db_engine
 
+def _open_session(db_engine):
+    '''Return an open session object to our backing data store
+    
+    Params:
+        db_engine: a valid sqlalchemy database engine
+        
+    Returns:
+        an open Session object
+    '''
+    from sqlalchemy.orm import sessionmaker
+    #pylint: disable=invalid-name
+    Session = sessionmaker(bind=db_engine)
+    #pylint: enable=invalid-name
+    session = Session()
+    return session
+
+
+    
+
