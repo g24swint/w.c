@@ -48,15 +48,10 @@ def _init_logs(reset_handlers=True):
     log.debug("     sqlite3: %s", (db.version))
     return log
 
-def _setup_engine(db_dir=None):
-    '''Set the database executioin file and create a db directory if none exists
-    
-    Params:
-        db_dir: directory where the sqlite3 db shall be put
-        
+def _get_db_name():
+    '''Calculate our db_dir if needed and relative to our cwd
     Returns:
-        sqlalchemy engine object
-    '''
+        Absolute path to our db directory'''
     log = logging.getLogger(__name__)
     db_dir = os.path.join(os.path.dirname(STARTUP_PATH), 'db')
     if not os.path.exists(db_dir):
@@ -64,25 +59,7 @@ def _setup_engine(db_dir=None):
     db_name = os.path.join(db_dir, "work_cards.db")
     log.debug(" db_dir:: %s", (db_dir))
     log.debug("db_name:: %s", (db_name))
-    db_engine = sa.create_engine("sqlite:///" + db_name)
-    return db_engine
-
-def _open_session(db_engine):
-    '''Return an open session object to our backing data store
-    
-    Params:
-        db_engine: a valid sqlalchemy database engine
-        
-    Returns:
-        an open Session object
-    '''
-    from sqlalchemy.orm import sessionmaker
-    #pylint: disable=invalid-name
-    Session = sessionmaker(bind=db_engine)
-    #pylint: enable=invalid-name
-    session = Session()
-    return session
+    return db_name
 
 
-    
 
