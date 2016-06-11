@@ -13,7 +13,7 @@ import logging
 
 
 from ._setup_routines import _init_logs, _get_db_name
-import w_c.wc_api as wc
+from w_c.wc_api import *
 
 
 # In[5]:
@@ -29,7 +29,7 @@ def standalone_exec():
 
 # In[6]:
 
-print(__name__)
+
 
 if __name__ == '__main__':
     standalone_exec()

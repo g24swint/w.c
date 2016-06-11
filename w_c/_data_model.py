@@ -20,7 +20,7 @@ Base = declarative_base()
 
 # In[3]:
 
-class Tasks(Base):
+class Task(Base):
     '''SQLAlchemy Tasks class that maps all tasks to the tasks table
     
     Task descriptions default to Twitter length strings :-)
@@ -42,7 +42,7 @@ class Tasks(Base):
 
 def test_Task_print():
     import datetime as dt
-    first_task = Tasks(desc="Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
+    first_task = Task(desc="Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
                       cur_comp=dt.datetime(2016, 6, 4), for_whom="Galen", status="Todo")
     print(first_task)
 test_Task_print()
@@ -51,7 +51,7 @@ test_Task_print()
 # In[5]:
 
 import datetime as dt
-first_task = Tasks(desc="Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
+first_task = Task(desc="Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
                    cur_comp=dt.datetime(2016, 6, 4), for_whom=1, status="Todo")
 
 
