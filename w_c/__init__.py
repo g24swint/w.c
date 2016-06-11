@@ -12,8 +12,8 @@ import time
 import logging
 
 
-from _setup_routines import _init_logs, _setup_engine, _open_session
-import wc_api as wc
+from ._setup_routines import _init_logs, _get_db_name
+import w_c.wc_api as wc
 
 
 # In[5]:

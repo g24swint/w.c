@@ -17,7 +17,7 @@ import sqlalchemy as sa
 
 # In[2]:
 
-from _data_model import *
+from ._data_model import *
 
 
 # In[19]:
