@@ -1,4 +1,4 @@
-name: C:\Users\Galen\Anaconda2\envs\py3k
+name: py3k
 dependencies:
 - backports=1.0=py35_0
 - colorama=0.3.7=py35_0
