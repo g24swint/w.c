@@ -24,7 +24,7 @@ class TestTask:
         import datetime
         test_logger.info("RUNNING TEST ONE")
         tl = w_c.TaskList(db_test_dir)
-        tl.add("Testing tastk1", for_whom='Galen', orig_comp = datetime.date())
+        tl.add("Testing tastk1", for_whom='Galen', orig_comp = datetime.datetime.now())
         full_list = tl.list()
-        assert full_list == []
+        assert len(full_list) == 1
 
