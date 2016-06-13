@@ -32,7 +32,6 @@ def list_tasks(**kwargs):
 
 if __name__ == "__main__":
     wc_log = _init_logs()
-    wc_log.level = logging.INFO
     wc_log.info("Running __main__")
     wc_tasks = TaskEngine(_get_db_name())
     workcard()

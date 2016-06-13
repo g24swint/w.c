@@ -1,11 +1,30 @@
+import sys
+import logging
 import pytest
 
 import w_c
 
+@pytest.fixture(scope='session')
+def test_logger():
+    w_c._init_logs(reset_handlers=True)
+    test_logger = logging.getLogger("w_c")
+    test_logger.setLevel(logging.DEBUG)
+    return test_logger
+
+
 class TestTask:
-    def test_one(self):
-        a = 1
-        assert a==1
-    def test_two_fail(self):
-        b = 1
-        assert b==5
+    def test_init(self, db_test_dir, test_logger):
+        test_logger.info("RUNNING TEST ONE")
+        tl = w_c.TaskList(db_test_dir)
+        tl.init()
+        full_list = tl.list()
+        assert full_list == []
+
+    def test_add(selfself, db_test_dir, test_logger):
+        import datetime
+        test_logger.info("RUNNING TEST ONE")
+        tl = w_c.TaskList(db_test_dir)
+        tl.add("Testing tastk1", for_whom='Galen', orig_comp = datetime.date())
+        full_list = tl.list()
+        assert full_list == []
+

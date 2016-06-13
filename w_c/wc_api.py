@@ -15,16 +15,12 @@ import datetime as dt
 import sqlalchemy as sa
 
 
-# In[2]:
-
 from ._data_model import *
-
-
-# In[19]:
 
 class TaskList():
     def __init__(self, db_name):
-        self.log = logging.getLogger(__name__)
+        self.log = logging.getLogger("w_c")
+        self.log.critical("db_name is : %s" % db_name)
         self.db_name = db_name
         self.db_engine = self._create_engine(db_name)
         self.session = self._open_session()
@@ -38,7 +34,8 @@ class TaskList():
         Returns:
             sqlalchemy engine object
         '''
-        db_engine = sa.create_engine("sqlite:///" + db_name)
+        self.log.debug("db_name: %s" % db_name)
+        db_engine = sa.create_engine("sqlite:///" + str(db_name))
         return db_engine
 
     def _open_session(self):
@@ -57,16 +54,19 @@ class TaskList():
         self.session = Session()
         return self.session
 
-    def clean_all(self):
-            '''Clean all tasks out of the list.
+    def init(self):
+        '''Clean all tasks out of the list.
 
-            Params:
-                session: an open sql alchemy session attached the to the tasks db
+        Params:
+            session: an open sql alchemy session attached the to the tasks db
 
-            Returns:
-                none
-            '''
-            self.session.query.delete()
+        Returns:
+            none
+        '''
+        # drop all in the db and rebuild
+        self.log.critical("Dropping and creating the task db")
+        Base.metadata.drop_all(self.db_engine)
+        Base.metadata.create_all(self.db_engine)
 
     def list(self):
         '''Return a list of all tasks.
@@ -76,9 +76,9 @@ class TaskList():
         Returns:
             list of all tasks in the db
         '''
-        all_tasks = self.session.query(Tasks).all()
-        self.log.debug("All tasks", (all_tasks))
-        print(all_tasks)
+        all_tasks = self.session.query(Task).all()
+        self.log.debug("All tasks %s", all_tasks)
+        #print(all_tasks)
         return all_tasks
 
     def add(self, desc, orig_comp, for_whom):
@@ -93,7 +93,7 @@ class TaskList():
         Returns:
             id for the added task
         '''
-        task_to_add = Tasks(desc=desc, orig_comp=orig_comp, cur_comp=orig_comp,
+        task_to_add = Task(desc=desc, orig_comp=orig_comp, cur_comp=orig_comp,
                             status="Todo", for_whom=for_whom)
         self.session.add(task_to_add)
         self.session.commit()
@@ -105,27 +105,3 @@ class TaskList():
 
 
 
-# In[20]:
-
-if __name__=="__main__":
-    from _setup_routines import _init_logs, _get_db_name
-    _init_logs()
-
-    db_dir = _get_db_name()
-
-    task_list = TaskList(db_dir)
-    # drop all in the db and rebuild
-    Base.metadata.drop_all(task_list.db_engine)
-    Base.metadata.create_all(task_list.db_engine)
-
-
-    first_task = Tasks(desc="Buy weekly groceries", orig_comp=dt.datetime(2016, 5, 29),
-                      cur_comp=dt.datetime(2016, 6, 4), for_whom=1, status="Todo")
-
-
-    task_list.add(first_task)
-
-    task_list.list(session)
-
-
-# In[ ]:

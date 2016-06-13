@@ -16,4 +16,7 @@ from ._setup_routines import _init_logs, _get_db_name
 from w_c.wc_api import *
 
 
-# In[5]:
+# turn on logging by default
+_init_logs(reset_handlers=False)
+print("Logger from init is %s" % logging.getLogger("w_c"))
+
