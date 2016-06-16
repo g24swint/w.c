@@ -4,3 +4,5 @@ __pycache__/*
 *.pyc
 Untitled.txt
 w_c.egg-info
+*~
+.cache/*

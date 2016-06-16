@@ -1,8 +1,4 @@
-
 # coding: utf-8
-
-# In[1]:
-
 """_setup_routines submodule initializes logger and data base locations.
 
 Will likely be replaced by more robust config-file style of startup"""
@@ -13,10 +9,6 @@ import logging
 
 import sqlite3 as db
 import sqlalchemy as sa
-
-
-# In[2]:
-
 STARTUP_PATH = os.getcwd()
 
 
@@ -33,12 +25,14 @@ def _init_logs(reset_handlers=True):
     Returns:
         The Logger object
     """
-    log = logging.getLogger(__name__)
+    log = logging.getLogger("w_c")
     if reset_handlers:
+        print("LOGGER IS ", log)
+
         log.handlers = []
         log_stream = logging.StreamHandler(sys.stdout)
-        log_formatter = logging.Formatter('%(asctime)s::%(name)s::%(filename)'+
-                                          's::%(levelname)s::%(message)s')
+        log_formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(name)'+
+                                          's:%(funcName)s:%(message)s')
         log_stream.setFormatter(log_formatter)
         log.addHandler(log_stream)
         log.setLevel(logging.DEBUG)

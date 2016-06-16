@@ -1,6 +1,7 @@
 name: py3k
 dependencies:
 - backports=1.0=py35_0
+- click=6.6=py35_0
 - colorama=0.3.7=py35_0
 - decorator=4.0.9=py35_0
 - entrypoints=0.2=py35_1
@@ -36,9 +37,16 @@ dependencies:
 - vs2015_runtime=14.00.23026.0=0
 - wheel=0.29.0=py35_0
 - pip:
+  - alabaster==0.7.8
+  - babel==2.3.4
   - backports.shutil-get-terminal-size==1.0.0
+  - docutils==0.12
   - ipython-genutils==0.1.0
   - jupyter-client==4.2.2
   - jupyter-core==4.1.0
+  - pytz==2016.4
+  - six==1.10.0
+  - snowballstemmer==1.2.1
   - sphinx==1.3.1
+  - sphinx-rtd-theme==0.1.9
 
